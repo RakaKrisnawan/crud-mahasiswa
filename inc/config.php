@@ -1,24 +1,23 @@
 <?php
-
 // Start session
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// simple autoload
-spl_autoload_register(function($class) {
-    $file = __DIR__ . '/../class/' . $class . '.php';
-    if (file_exists($file)) {
-        require_once $file;
-    }
-});
+require_once __DIR__ . '/../class/Database.php';
+require_once __DIR__ . '/../class/User.php';
 
-// database config
 $host = 'localhost';
-$dbname = ''; // nama database nanti isi setelah fix
+$dbname = 'crud_mahasiswa'; 
 $username = 'root';
 $password = '';
 
+// buat objek database
+$database = new Database($host, $dbname, $username, $password);
+$db = $database->getConnection();
+
 // Define base URL
-$base_url = ''; // nanti sesuaikan dengan folder project
+$base_url = ''; 
 
 // navigasi config
     
