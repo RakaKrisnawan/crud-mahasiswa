@@ -72,8 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["user_id"] = $data["id"];
             $_SESSION["username"] = $data["username"];
             $_SESSION["name"] = $data["name"];
-
-            $user->updateLastLogin($data["id"]);
+            $_SESSION["join_date"] = $data["join_date"];
 
             header("Location: index.php");
             exit;
