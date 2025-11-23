@@ -73,10 +73,10 @@ $data_mahasiswa = $mahasiswa->getAll();
             <td><?= htmlspecialchars($mhs["prodi"]) ?></td>
             <td><?= htmlspecialchars($mhs["status"]) ?></td>
             <td>
-                <img src="uploads/<?= htmlspecialchars($mhs["foto"]) ?>" width="60">
+              <img src="uploads/foto_mahasiswa/<?= htmlspecialchars($mhs['foto']) ?>" width="60">
             </td>
             <td>
-                <a href="mahasiswa/edit.php?id=<?= $mhs['id'] ?>">Edit</a>
+                <a href="mahasiswa/update.php?id=<?= $mhs['id'] ?>">Edit</a>
                 <a href="mahasiswa/delete.php?id=<?= $mhs['id'] ?>">Delete</a>
             </td>
         </tr>
