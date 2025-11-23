@@ -31,7 +31,8 @@ $data = [
     "nama" => $mahasiswaObj->nama,
     "prodi" => $mahasiswaObj->prodi,
     "status" => $mahasiswaObj->status,
-    "foto" => $mahasiswaObj->foto
+    "foto" => $mahasiswaObj->foto,
+    "angkatan" => $mahasiswaObj->angkatan
 ];
 
 // Jika submit form
@@ -105,6 +106,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </select>
       </div>
 
+      <div class="row">
+        <label>Angkatan:</label>
+        <input type="text" value="<?= htmlspecialchars($data['angkatan']) ?>" readonly>
+      </div>
+      
       <div class="row">
         <label>Status:</label>
         <select name="status" required>

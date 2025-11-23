@@ -1,25 +1,19 @@
 <?php
-
-// require necessary files
 require_once "inc/config.php";
 require_once "class/Mahasiswa.php";
+require_once "class/User.php";
 
-// check if user is logged in
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit;
 }
 
-// load user data
 $user = new User($db);
 $user->loadById($_SESSION["user_id"]);
 
-// ambil data mahasiswa
 $mahasiswa = new Mahasiswa($db);
 $data_mahasiswa = $mahasiswa->getAll();
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,47 +46,38 @@ $data_mahasiswa = $mahasiswa->getAll();
 
     <a href="mahasiswa/create.php" class="btn-add">Tambah Data</a>
 
-<table border="1" cellpadding="8" cellspacing="0">
-    <tr>
-        <th>No</th>
-        <th>NIM</th>
-        <th>Nama</th>
-        <th>Prodi</th>
-        <th>Status</th>
-        <th>Foto</th>
-        <th>Aksi</th>
-    </tr>
-
-    <?php if (!empty($data_mahasiswa)): ?>
-
-    <?php $i = 1; foreach ($data_mahasiswa as $mhs): ?>
+    <table border="1" cellpadding="8" cellspacing="0">
         <tr>
-            <td><?= $i ?></td>
-            <td><?= htmlspecialchars($mhs["nim"]) ?></td>
-            <td><?= htmlspecialchars($mhs["nama"]) ?></td>
-            <td><?= htmlspecialchars($mhs["prodi"]) ?></td>
-            <td><?= htmlspecialchars($mhs["status"]) ?></td>
-            <td>
-              <img src="uploads/foto_mahasiswa/<?= htmlspecialchars($mhs['foto']) ?>" width="60">
-            </td>
-            <td>
-                <a href="mahasiswa/update.php?id=<?= $mhs['id'] ?>">Edit</a>
-                <a href="mahasiswa/delete.php?id=<?= $mhs['id'] ?>">Delete</a>
-            </td>
-        </tr>
-    <?php $i++; endforeach; ?>
-
-    <?php else: ?>
-
-        <tr>
-            <td colspan="7">Belum ada data mahasiswa.</td>
+            <th>No</th>
+            <th>NIM</th>
+            <th>Nama</th>
+            <th>Prodi</th>
+            <th>Status</th>
+            <th>Aksi</th>
         </tr>
 
-    <?php endif; ?>
-
-</table>
-
+        <?php if (!empty($data_mahasiswa)): ?>
+        <?php $i = 1; foreach ($data_mahasiswa as $mhs): ?>
+            <tr>
+                <td><?= $i ?></td>
+                <td><?= htmlspecialchars($mhs["nim"]) ?></td>
+                <td><?= htmlspecialchars($mhs["nama"]) ?></td>
+                <td><?= htmlspecialchars($mhs["prodi"]) ?></td>
+                <td><?= htmlspecialchars($mhs["status"]) ?></td>
+                
+                <td>
+                    <a href="mahasiswa/detail.php?id=<?= $mhs['id'] ?>">Detail</a>
+                    <a href="mahasiswa/update.php?id=<?= $mhs['id'] ?>">Edit</a>
+                    <a href="mahasiswa/delete.php?id=<?= $mhs['id'] ?>">Delete</a>
+                </td>
+            </tr>
+        <?php $i++; endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="8">Belum ada data mahasiswa.</td>
+            </tr>
+        <?php endif; ?>
+    </table>
   </main>
-  
 </body>
 </html>

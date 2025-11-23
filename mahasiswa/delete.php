@@ -10,7 +10,6 @@ if (!isset($_SESSION["user_id"])) {
 
 // Ambil ID dari URL
 $id = $_GET["id"] ?? null;
-
 if (!$id) {
     echo "ID tidak valid";
     exit;
@@ -25,12 +24,12 @@ if (!$mahasiswaObj->loadById($id)) {
 }
 
 // Kalau user konfirmasi hapus
-if (isset($_POST["confirm"]) && $_POST["confirm"] === "yes") {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["confirm"] ?? "") === "yes") {
 
     // Hapus foto jika ada
     if (!empty($mahasiswaObj->foto)) {
         $file_path = "../uploads/foto_mahasiswa/" . $mahasiswaObj->foto;
-        if (file_exists($file_path)) {
+        if (file_exists($file_path) && is_file($file_path)) {
             unlink($file_path);
         }
     }
@@ -44,11 +43,11 @@ if (isset($_POST["confirm"]) && $_POST["confirm"] === "yes") {
     echo "Gagal menghapus data.";
     exit;
 }
-
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Hapus Mahasiswa</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -66,11 +65,11 @@ if (isset($_POST["confirm"]) && $_POST["confirm"] === "yes") {
     <p>NIM: <?= htmlspecialchars($mahasiswaObj->nim) ?></p>
     <p>Nama: <?= htmlspecialchars($mahasiswaObj->nama) ?></p>
 
-    <?php if ($mahasiswaObj->foto): ?>
-      <img src="../uploads/foto_mahasiswa/<?= $mahasiswaObj->foto ?>" width="90">
+    <?php if (!empty($mahasiswaObj->foto)): ?>
+        <img src="../uploads/foto_mahasiswa/<?= htmlspecialchars($mahasiswaObj->foto) ?>" width="90" alt="Foto Mahasiswa">
     <?php endif; ?>
 
-    <form action="" method="POST" style="margin-top:20px;">
+    <form method="POST" style="margin-top:20px;">
         <input type="hidden" name="confirm" value="yes">
         <button type="submit">Ya, Hapus</button>
         <a href="../index.php" class="btn-back">Batal</a>

@@ -18,12 +18,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nama = trim($_POST["nama"] ?? "");
     $prodi = trim($_POST["prodi"] ?? "");
     $status = trim($_POST["status"] ?? "");
+    $angkatan = trim($_POST["angkatan"] ?? "");
 
     // Validasi sederhana
-    if ($nim === "" || $nama === "" || $prodi === "" || $status === "") {
+    if ($nim === "" || $nama === "" || $prodi === "" || $status === "" || $angkatan === "") {
         header("Location: create.php?error=empty");
         exit;
     }
+
+    // Validasi angka
+    if (!is_numeric($angkatan) || $angkatan < 0) {
+        header("Location: create.php?error=angkatan");
+        exit;
+    }
+    
 
     $foto_name = "";
 
@@ -76,6 +84,7 @@ if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] === 0) {
     $mahasiswaObj->prodi = $prodi;
     $mahasiswaObj->status = $status;
     $mahasiswaObj->foto = $foto_name;
+    $mahasiswaObj->angkatan = $angkatan;
 
     // Simpan
     if ($mahasiswaObj->create()) {
@@ -123,6 +132,11 @@ if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] === 0) {
     <?php if (isset($_GET["error"]) && $_GET["error"] === "bigfile"): ?>
         <p>Ukuran foto maksimal 5MB.</p>
     <?php endif; ?>
+    
+    <?php if (isset($_GET["error"]) && $_GET["error"] === "angkatan"): ?>
+        <p>Angkatan harus berupa angka dan minimal 0.</p>
+    <?php endif; ?>    
+    
 
     <form action="" method="POST" enctype="multipart/form-data" class="form-box">
 
@@ -144,7 +158,12 @@ if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] === 0) {
           <option value="Sistem Komputer">Sistem Komputer</option>
         </select>
       </div>
-
+      
+      <div class="row">
+        <label>Angkatan:</label>
+        <input type="number" name="angkatan" min="0" required>
+      </div>
+      
       <div class="row">
         <label>Status:</label>
         <select name="status" required>
@@ -152,6 +171,8 @@ if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] === 0) {
           <option value="nonaktif">Nonaktif</option>
         </select>
       </div>
+
+      
 
       <div class="row">
         <label>Foto:</label>

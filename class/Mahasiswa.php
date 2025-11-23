@@ -11,6 +11,7 @@ class Mahasiswa {
     public $prodi;
     public $status;
     public $foto;
+    public $angkatan;
 
     public function __construct($db) {
         $this->db = $db;
@@ -30,6 +31,7 @@ class Mahasiswa {
             $this->prodi = $data["prodi"];
             $this->status = $data["status"];
             $this->foto = $data["foto"];
+            $this->angkatan = $data["angkatan"]; // ambil angkatan
             return true;
         }
         return false;
@@ -44,15 +46,16 @@ class Mahasiswa {
 
     // Insert data baru
     public function create() {
-        $sql = "INSERT INTO {$this->table} (nim, nama, prodi, status, foto)
-                VALUES (:nim, :nama, :prodi, :status, :foto)";
+        $sql = "INSERT INTO {$this->table} (nim, nama, prodi, status, foto, angkatan)
+                VALUES (:nim, :nama, :prodi, :status, :foto, :angkatan)";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             "nim" => $this->nim,
             "nama" => $this->nama,
             "prodi" => $this->prodi,
             "status" => $this->status,
-            "foto" => $this->foto
+            "foto" => $this->foto,
+            "angkatan" => $this->angkatan
         ]);
     }
 
@@ -63,7 +66,8 @@ class Mahasiswa {
                     nama = :nama,
                     prodi = :prodi,
                     status = :status,
-                    foto = :foto
+                    foto = :foto,
+                    angkatan = :angkatan
                 WHERE id = :id";
 
         $stmt = $this->db->prepare($sql);
@@ -74,6 +78,7 @@ class Mahasiswa {
             "prodi" => $this->prodi,
             "status" => $this->status,
             "foto" => $this->foto,
+            "angkatan" => $this->angkatan,
             "id" => $this->id
         ]);
     }
