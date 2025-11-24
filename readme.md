@@ -4,9 +4,13 @@
 
     Aplikasi ini menggunakan dua entitas utama, yaitu entitas User dan entitas Mahasiswa. Entitas User berfungsi sebagai pengelola autentikasi, di mana setiap pengguna dapat melakukan registrasi, login, memperbarui kata sandi, serta menghapus akun yang sedang digunakan. Setelah berhasil login, pengguna memperoleh akses ke seluruh fitur aplikasi untuk mengelola data mahasiswa. Sementara itu, entitas Mahasiswa menjadi objek utama pendataan, mencakup informasi seperti nama, NIM, angkatan, program studi, status aktif, serta foto mahasiswa.
 
+    <br>
+
     Penjelasan singkat fungsi aplikasi.
 
     Fitur aplikasi berfokus pada pengelolaan data mahasiswa melalui operasi Create, Read, Update, dan Delete. Pengguna dapat menambahkan data mahasiswa baru lengkap dengan unggahan foto, menampilkan daftar mahasiswa dalam tampilan terstruktur, melakukan pembaruan data tertentu, dan menghapus data yang tidak diperlukan. Seluruh proses pengolahan data dilakukan melalui antarmuka yang sederhana dan terintegrasi dengan sistem autentikasi, sehingga hanya pengguna terverifikasi yang dapat melakukan perubahan pada data mahasiswa.
+
+<br>
 
 2. **Spesifikasi Teknis**
 
@@ -14,13 +18,19 @@
 
     Spesifikasi teknis aplikasi ini dibangun menggunakan PHP versi 8.4.8 yang berjalan melalui instalasi PHP mandiri di sistem operasi pengguna, sementara sistem manajemen basis data yang digunakan adalah MySQL bawaan XAMPP.
 
+    <br>
+
     Struktur folder secara ringkas.
     
     Seluruh konfigurasi koneksi database dikelola melalui berkas inc/config.php, yang memuat inisialisasi sesi, pemanggilan class Database dan User, serta parameter host, nama basis data, username, dan password untuk membuat koneksi aktif ke database crud_mahasiswa. Struktur folder aplikasi disusun secara ringkas namun terorganisasi, mencakup folder class yang berisi komponen inti seperti Database.php, User.php, dan Mahasiswa.php; folder inc untuk file konfigurasi; folder mahasiswa yang menampung halaman create, edit, delete, dan detail; folder user untuk fitur manajemen akun seperti penggantian password dan penghapusan akun; folder uploads/foto_mahasiswa untuk penyimpanan foto; serta berkas-berkas fungsional utama di root seperti authenticate.php, index.php, login.php, logout.php, register.php, dan schema.sql. Selain itu, terdapat folder css yang memuat style.css sebagai stylesheet utama tampilan aplikasi.
 
+    <br>
+
     Penjelasan class utama (Database, Entity, Repository).
     
     Struktur class dalam aplikasi mengikuti pola sederhana dan mudah dipahami. Class Database berperan sebagai pengelola koneksi ke MySQL menggunakan PDO, menyediakan satu instance koneksi yang dapat digunakan oleh seluruh bagian aplikasi. Class User bertanggung jawab menangani seluruh proses autentikasi dan manajemen akun, termasuk registrasi, validasi login, pemanggilan data pengguna, pembaruan password, serta penghapusan akun. Sementara itu, class Mahasiswa menangani seluruh operasi CRUD untuk entitas mahasiswa, mulai dari pengambilan data, penyimpanan, pembaruan, penghapusan, hingga pengelolaan file foto di folder uploads. Tidak terdapat class Utility dalam proyek ini karena sudah dihapus sebagai bagian dari proses pembersihan file. Dengan struktur teknis ini, aplikasi dapat dijalankan dengan jelas, modular, serta mudah dipahami dalam konteks pengembangan CRUD berbasis PHP dan MySQL.
+
+<br>
 
 3. **Instruksi Menjalankan Aplikasi**
 
@@ -35,6 +45,8 @@
     sehingga struktur akhirnya menjadi :~
     
                 C:\xampp\htdocs\crud-mahasiswa\
+
+    <br>
 
     Langkah impor basis data (`schema.sql`).
         
@@ -54,6 +66,8 @@
 
     Database dan seluruh tabel akan otomatis dibuat tanpa perlu setup manual.
         
+    <br>
+
     Cara mengatur konfigurasi koneksi database.
         
     1.Buka folder inc/, lalu buka file config.php
@@ -62,6 +76,8 @@
         
     (XAMPP biasanya menggunakan username "root" dan password "" / kosong)
 
+    <br>
+    
     Cara menjalankan aplikasi 
         
     1.Jika menggunakan PHP bawaan, jalankan server lokal dengan perintah berikut dari folder proyek:
@@ -83,6 +99,8 @@
             
     setelah kehalaman index.php. user yang tidak memiliki session yang didapat dari login akan dikembalikan ke halaman login.php
 
+<br>
+
 4. **Contoh Skenario Uji Singkat**
 
     User
@@ -98,6 +116,8 @@
     4.Menghapus akun yang sedang login melalui halaman delete account. (tombol terletak di halaman index.php)
     
     akan ada halaman konfirmasi (menghindari user salah tekan)
+
+    <br>
 
     Mahasiswa
         
