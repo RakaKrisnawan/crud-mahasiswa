@@ -42,7 +42,11 @@ $data_mahasiswa = $mahasiswa->getAll();
         <li>Name: <?= htmlspecialchars($user->name) ?></li>
         <li>Join Date: <?= htmlspecialchars($_SESSION["join_date"]) ?></li>
       </ul>
+
+      <a href="user/update_user_password.php">Ganti Password</a>
+      <a href="user/delete_user.php">Hapus Akun</a>
     </section>
+
 
     <a href="mahasiswa/create.php" class="btn-add">Tambah Data</a>
 
