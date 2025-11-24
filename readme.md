@@ -34,6 +34,10 @@
 
 3. **Instruksi Menjalankan Aplikasi**
 
+    Download file .rar nya disini [DOWNLOAD](https://github.com/RakaKrisnawan/crud-mahasiswa/releases/download/project/crud-mahasiswa.rar)
+
+    <br>
+
     Lokasi Penempatan Folder Aplikasi
     
     1.Jika ingin menjalankan menggunakan PHP built-in server, ekstrak folder proyek di lokasi mana saja pada komputer.
