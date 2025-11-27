@@ -87,16 +87,21 @@
     1.0 Jika mau menjalankan project didalam PHP built-in server (misalnya localhost:8000)
        pastikan meng config file php.ini (didalam folder php user), dan aktifkan extension berikut :
 
-        Pastikan baris berikut TANPA titik koma (;) di depannya:
-        extension=mysqli
-        extension=pdo_mysql
-        extension=mysqlnd
-        extension=fileinfo
-        extension=gd
-        extension=openssl
-        extension=mbstring
-        extension=json
-        extension=curl
+            Pastikan baris berikut TANPA titik koma (;) di depannya:
+            extension=mysqli
+            extension=pdo_mysql
+            extension=mysqlnd
+            extension=fileinfo
+            extension=gd
+            extension=openssl
+            extension=mbstring
+            extension=json
+            extension=curl
+   
+   lalu edit kode berikut di php.ini (ubah value nya saja)
+
+            upload_max_filesize = 10M (dari 2m -> 10m)
+            post_max_size = 20M (dari 8m -> 20m)
 
 
     1.1.Jika menggunakan PHP bawaan, jalankan server lokal dengan perintah berikut dari folder proyek:
