@@ -83,8 +83,23 @@
     <br>
     
     Cara menjalankan aplikasi 
-        
-    1.Jika menggunakan PHP bawaan, jalankan server lokal dengan perintah berikut dari folder proyek:
+
+    1.0 Jika mau menjalankan project didalam PHP built-in server (misalnya localhost:8000)
+       pastikan meng config file php.ini (didalam folder php user), dan aktifkan extension berikut :
+
+        Pastikan baris berikut TANPA titik koma (;) di depannya:
+        extension=mysqli
+        extension=pdo_mysql
+        extension=mysqlnd
+        extension=fileinfo
+        extension=gd
+        extension=openssl
+        extension=mbstring
+        extension=json
+        extension=curl
+
+
+    1.1.Jika menggunakan PHP bawaan, jalankan server lokal dengan perintah berikut dari folder proyek:
         
             php -S localhost:8000
 
