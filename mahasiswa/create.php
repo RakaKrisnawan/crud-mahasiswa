@@ -66,7 +66,14 @@ if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] === 0) {
     }
 
     // Pastikan folder ada
-    $upload_dir = "../uploads/foto_mahasiswa/";
+    $upload_dir = __DIR__ . "/../uploads/foto_mahasiswa/";
+
+    if ($upload_dir === false) {
+        $upload_dir = __DIR__ . "/../uploads/foto_mahasiswa/";
+        mkdir($upload_dir, 0777, true);
+    }
+
+    
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0777, true);
     }
@@ -74,7 +81,12 @@ if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] === 0) {
     // Buat nama file baru
     $foto_name = "foto_" . time() . "_" . rand(1000, 9999) . "." . $ext;
 
-    move_uploaded_file($file_tmp, $upload_dir . $foto_name);
+    // Pindahkan file
+    if (!move_uploaded_file($file_tmp, $upload_dir . $foto_name)) {
+        header("Location: create.php?error=movefail");
+        exit;
+    }
+    // move_uploaded_file($file_tmp, $upload_dir . "/" . $foto_name);
     }
 
 

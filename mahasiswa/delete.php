@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["confirm"] ?? "") === "yes"
 
     // Hapus foto jika ada
     if (!empty($mahasiswaObj->foto)) {
-        $file_path = "../uploads/foto_mahasiswa/" . $mahasiswaObj->foto;
+        $file_path = __DIR__ . "/../uploads/foto_mahasiswa/" . $mahasiswaObj->foto;
         if (file_exists($file_path) && is_file($file_path)) {
             unlink($file_path);
         }
